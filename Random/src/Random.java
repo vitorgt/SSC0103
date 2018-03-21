@@ -49,7 +49,9 @@ public class Random {
 		return (int)(getRand()*max);
 	}
 
-	public int getIntRand(int min, int max){
+	public int getIntRand(int min, int max) throws IllegalArgumentException{
+		if(max <= min)
+			throw new IllegalArgumentException("Invalid parameters");
 		return (int)(min+(getRand()*(max-min)));
 	}
 
