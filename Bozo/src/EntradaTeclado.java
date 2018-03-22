@@ -1,14 +1,13 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
  * Esta classe foi desenhada para facilitar a entrada de dados
- * pelo teclado. Basicamente ela implementa funções para
+ * pelo teclado. Basicamente ela implementa funcoes para
  * ler strings, inteiros e doubles. 
- * Ela não faz verificações se o que foi digitado realmente
- * é o esperado.
+ * Ela nao faz verificacoes se o que foi digitado realmente
+ * e o esperado.
  * Todos 
  * @author delamaro
  *
@@ -18,9 +17,9 @@ static InputStreamReader isr = new InputStreamReader(System.in);
 static BufferedReader br = new BufferedReader(isr);
 	
 	/**
-	 * Le um string digitado pelo teclado, até que seja pressionado
+	 * Le um string digitado pelo teclado, ate que seja pressionado
 	 * um enter. Ou seja, le a linha toda.
-	 * @return o string que foi digitado pelo usuário.
+	 * @return o string que foi digitado pelo usuario.
 	 * @throws IOException
 	 */
 	public static String leString() throws IOException {
@@ -31,9 +30,9 @@ static BufferedReader br = new BufferedReader(isr);
 	}
 
 	/**
-	 * Le um string do teclado (uma linha toda) e tenta transformá-lo num inteiro. 
-	 * Porém não faz qualquer verificação sobre a validade do dado digitado.
-	 * @return  o valor inteiro digitado pelo usuário. 
+	 * Le um string do teclado (uma linha toda) e tenta transforma-lo num inteiro. 
+	 * Porem nao faz qualquer verificacao sobre a validade do dado digitado.
+	 * @return  o valor inteiro digitado pelo usuario. 
 	 * @throws IOException
 	 */
 	public static int leInt() throws IOException {
@@ -42,9 +41,9 @@ static BufferedReader br = new BufferedReader(isr);
 	}
 
 	/**
-	 * Le um string do teclado (uma linha toda) e tenta transformá-lo num double. 
-	 * Porém não faz qualquer verificação sobre a validade do dado digitado.
-	 * @return  o valor double digitado pelo usuário. 
+	 * Le um string do teclado (uma linha toda) e tenta transforma-lo num double. 
+	 * Porem nao faz qualquer verificacao sobre a validade do dado digitado.
+	 * @return  o valor double digitado pelo usuario. 
 	 * @throws IOException
 	 */
 
