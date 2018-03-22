@@ -1,8 +1,7 @@
-
 /**
- * Simula um dado de número de lados variados.
- * Ao criar o objeto é possível estabelecer o número de lados.
- * A rolagem do dado é feita por meio de um gerador de números aleatórios (Random).
+ * Simula um dado de numero de lados variados.
+ * Ao criar o objeto e possivel estabelecer o numero de lados.
+ * A rolagem do dado e feita por meio de um gerador de numeros aleatorios (Random).
  * @author Fabio e Vitor
  *
  */
@@ -19,25 +18,25 @@ public class Dado {
 	private String d6 = "+-----+\n|*   *|\n|*   *|\n|*   *|\n+-----+";
 
 	/**
-	 * Não tem função real dentro da classe.
-	 * Foi usada apenas para testar os métodos implementados
+	 * Nao tem funcao real dentro da classe.
+	 * Foi usada apenas para testar os metodos implementados
 	 * @param args - sem uso
 	 */
 	public static void main(String[] args) {
 	}
 
 	/**
-	 * Recupera o último número selecionado.
-	 * @return o número do último lado selecionado.
+	 * Recupera o ultimo numero selecionado.
+	 * @return o numero do ultimo lado selecionado.
 	 */
 	public int getLado() {
 		return ultimoGerado;
 	}
 
 	/**
-	 * Simula a rolagem do dado por meio de um gerador aleatório.
-	 * O número selecionado pode posteriormente ser recuperado com a chamada a getLado()
-	 * @return o número que foi sorteado
+	 * Simula a rolagem do dado por meio de um gerador aleatorio.
+	 * O numero selecionado pode posteriormente ser recuperado com a chamada a getLado()
+	 * @return o numero que foi sorteado
 	 */
 	public int rolar() {
 		this.ultimoGerado = r.getIntRand(numeroLados)+1;
@@ -52,17 +51,17 @@ public class Dado {
 	}
 
 	/**
-	 * Cria objeto com um número qualquer de lados
-	 * @param n - número de lados do dado
+	 * Cria objeto com um numero qualquer de lados
+	 * @param n - numero de lados do dado
 	 */
 	public Dado(int n) {
 		this.numeroLados = n;
 	}
 
 	/**
-	 * Transforma representação do dado em String.
-	 * É mostrada uma representação do dado que está para cima.
-	 * Note que só funciona corretamente para dados de 6 lados.
+	 * Transforma representacao do dado em String.
+	 * E mostrada uma representacao do dado que esta para cima.
+	 * Note que so funciona corretamente para dados de 6 lados.
 	 */
 	@Override
 		public String toString() {
