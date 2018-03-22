@@ -1,17 +1,16 @@
-/**
- * Essa é a classe inicial do programa Bozó. Possui apenas o método main, que cuida da execução do jogo.
- * @author Fabio e Vitor
- */
-
 import java.io.IOException;
 
+/**
+ * Essa e a classe inicial do programa Bozo. Possui apenas o metodo main, que cuida da execucao do jogo.
+ * @author Fabio Fogarin Destro - 10284667 e Vitor Gratiere Torres - 10284952
+ */
 public class Bozo {
 
 	/**
-	 * Método inicial do programa.
-	 * Ele cuida da execução do jogo e possui um laço, no qual cada iteração representa uma rodada do jogo.
-	 * Em cada rodada, o jogador joga os dados até 3 vezes e depois escolhe a posição do placar que deseja preencher.
-	 * No final das rodadas a pontuação total é exibida.
+	 * Metodo inicial do programa.
+	 * Ele cuida da execucao do jogo e possui um laco, no qual cada iteracao representa uma rodada do jogo.
+	 * Em cada rodada, o jogador joga os dados ate 3 vezes e depois escolhe a posicao do placar que deseja preencher.
+	 * No final das rodadas a pontuacao total e exibida.
 	 * @param args
 	 * @throws InterruptedException
 	 * @throws IOException
@@ -23,37 +22,49 @@ public class Bozo {
 		System.out.println(placar);
 
 		for(int i=1;i<=10;i++){ // 10 rodadas
-			System.out.printf("****** Rodada %d\nPressione ENTER para lançar os dados\n",i);
-			String aux = EntradaTeclado.leString();
-
-			for(int t = 0;t<2;t++){
+			System.out.printf("****** Rodada %d\nPressione ENTER para lancar os dados\n",i);
+			String aux = EntradaTeclado.leString(); // serve para ler o enter do usuario
+			
+			for(int t = 0;t<2;t++){ // duas vezes para mudar os dados
 				if(t == 0) rola.Rolar();
-				System.out.printf("Digite os números dos dados que quiser TROCAR. Separados por espaços.\n");
+				System.out.printf("Digite os numeros dos dados que quiser TROCAR. Separados por espacos.\n");
 				String trocarDados = EntradaTeclado.leString();
 				boolean trocar[] = {false, false, false, false,false};
 				String txtNum = "";
-				for(int j=0;j<trocarDados.length();j++){
-					if(trocarDados.charAt(j) != ' ') txtNum+= trocarDados.charAt(j);
-					else {
+				try{
+					for(int j=0;j<trocarDados.length();j++){
+						if(trocarDados.charAt(j) != ' ') txtNum+= trocarDados.charAt(j);
+						else {
+							int valAt = Integer.parseInt(txtNum);
+							txtNum = "";
+							trocar[valAt-1] = true;
+						}
+					}
+					if(trocarDados.length() > 0){
 						int valAt = Integer.parseInt(txtNum);
-						txtNum = "";
 						trocar[valAt-1] = true;
 					}
+				}catch(Exception e){
+					/* caso algum espaço seja digitado a mais e uma conversão da string "" para int tente acontecer
+					evita que o programa pare e continua trocando o que necessário! */
 				}
-				if(trocarDados.length() > 0){
-					int valAt = Integer.parseInt(txtNum);
-					trocar[valAt-1] = true;
-				}
-				rola.Rolar(trocar);
+				rola.Rolar(trocar); // troca os dados necessários
 			}
 
 			System.out.printf("\n\n\n");
 			System.out.println(placar);
 
-			System.out.print("Escolha a posição que quer ocupar com essa jogada ===> ");
-			int pos = EntradaTeclado.leInt();
+			while(true){ // enquanto a posição digitada não for valida
+				System.out.print("Escolha a posicao que quer ocupar com essa jogada ===> ");
+				int pos = EntradaTeclado.leInt();
 
-			placar.add(pos, rola.getResultadosDados());
+				try{
+					placar.add(pos, rola.getResultadosDados());
+					break; // a posição digitada é valida, sai do Loop
+				}catch(Exception e){
+					System.out.printf("Valor inválido. Posição ocupada ou inexistente.\n");
+				}
+			}
 			System.out.println(placar);
 		}
 		System.out.printf("Placar final: %d\n",placar.getScore());
