@@ -1,7 +1,6 @@
-
 /**
- * Essa é uma classe auxiliar que permite gerencia um conjunto de vários dados simultaneamente.
- * Operações como rolar alguns dos dados ou exibir o resultado de todos eles, são implementadas.
+ * Essa e uma classe auxiliar que permite gerencia um conjunto de varios dados simultaneamente.
+ * Operacoes como rolar alguns dos dados ou exibir o resultado de todos eles, sao implementadas.
  * @author Fabio e Vitor
  *
  */
@@ -20,10 +19,10 @@ public class RolaDados {
 	}
 
 	/**
-	 * Construtor que cria e armazena vários objetos do tipo Dado.
-	 * Usa para isso o construtor padrão daquela classe, ou seja, um dado de 6 lados e gerando sempre uma semente aleatória para o gerador de números aleatórios.
-	 * Os dados criados podem ser referenciados por números, entre 1 e n.
-	 * @param n - Número de dados a serem criados.
+	 * Construtor que cria e armazena varios objetos do tipo Dado.
+	 * Usa para isso o construtor padrao daquela classe, ou seja, um dado de 6 lados e gerando sempre uma semente aleatoria para o gerador de numeros aleatorios.
+	 * Os dados criados podem ser referenciados por numeros, entre 1 e n.
+	 * @param n - Numero de dados a serem criados.
 	 * @throws InterruptedException
 	 */
 	public RolaDados(int n) throws InterruptedException{
@@ -38,7 +37,7 @@ public class RolaDados {
 
 	/**
 	 * Rola todos os dados.
-	 * @return Retorna o valor de cada um dos dados, inclusive os que não foram rolados. Nesse caso, o valor retornado é o valor anterior que ele já possuia.
+	 * @return Retorna o valor de cada um dos dados, inclusive os que nao foram rolados. Nesse caso, o valor retornado e o valor anterior que ele ja possuia.
 	 */
 	public int[] Rolar(){
 		for(int i = 0; i < numeroDados; i++){
@@ -59,8 +58,8 @@ public class RolaDados {
 
 	/**
 	 * Rola alguns dos dados.
-	 * @param quais - É um array de booleanos que indica quais dados devem ser rolados. Cada posição representa um dos dados. Ou seja, a posição 0 do array indica se o dado 1 deve ser rolado ou não, e assim por diante.
-	 * @return Retorna o valor de cada um dos dados, inclusive os que não foram rolados. Nesse caso, o valor retornado é o valor anterior que ele já possuia.
+	 * @param quais - E um array de booleanos que indica quais dados devem ser rolados. Cada posicao representa um dos dados. Ou seja, a posicao 0 do array indica se o dado 1 deve ser rolado ou nao, e assim por diante.
+	 * @return Retorna o valor de cada um dos dados, inclusive os que nao foram rolados. Nesse caso, o valor retornado e o valor anterior que ele ja possuia.
 	 */
 	public int[] Rolar(boolean quais[]){
 		for(int i = 0; i < numeroDados; i++){
@@ -73,8 +72,8 @@ public class RolaDados {
 
 	/**
 	 * Rola alguns dos dados.
-	 * @param s - É um String que possui o número dos dados a serem rolados. Por exemplo "1 4 5" indica que os dados 1 4 e cinco devem ser rolados. Os números devem ser separados por espaços. Se o valor passado no string estiver fora do intervalo válido, ele é ignorado simplesmente.
-	 * @return Retorna o valor de cada um dos dados, inclusive os que não foram rolados. Nesse caso, o valor retornado é o valor anterior que ele já possuia.
+	 * @param s - E um String que possui o numero dos dados a serem rolados. Por exemplo "1 4 5" indica que os dados 1 4 e cinco devem ser rolados. Os numeros devem ser separados por espacos. Se o valor passado no string estiver fora do intervalo valido, ele e ignorado simplesmente.
+	 * @return Retorna o valor de cada um dos dados, inclusive os que nao foram rolados. Nesse caso, o valor retornado e o valor anterior que ele ja possuia.
 	 */
 	public int[] Rolar(String s){
 		boolean trocar[] = new boolean[numeroDados];
@@ -104,7 +103,7 @@ public class RolaDados {
 
 
 	/**
-	 * Usa a representação em string do dados, para mostrar o valor de todos os dados do conjunto. Exibe os dados horisontalmente.
+	 * Usa a representacao em string do dados, para mostrar o valor de todos os dados do conjunto. Exibe os dados horisontalmente.
 	 */
 	@Override
 		public String toString(){
@@ -123,8 +122,8 @@ public class RolaDados {
 		}
 
 	/**
-	 * Não tem função real dentro da classe.
-	 * Foi usada apenas para testar os métodos implementados
+	 * Nao tem funcao real dentro da classe.
+	 * Foi usada apenas para testar os metodos implementados
 	 * @param args - sem uso
 	 */
 	public static void main(String[] args){
