@@ -1,7 +1,6 @@
-
 /**
- * Esta classe representa o placar de um jogo de Bozó.
- * Permite que combinações de dados sejam alocadas às posições e mantém o escore de um jogador.
+ * Esta classe representa o placar de um jogo de Bozo.
+ * Permite que combinacoes de dados sejam alocadas as posicoes e mantem o escore de um jogador.
  * @author Fabio e Vitor
  *
  */
@@ -10,11 +9,11 @@ public class Placar {
 	private int[] placar = {-1, -1,-1, -1,-1, -1,-1, -1,-1, -1};
 
 	/**
-	 * Adiciona uma sequencia de dados em uma determinada posição do placar.
-	 * Após a chamada, aquela posição torna-se ocupada e não pode ser usada uma segunda vez.
-	 * @param posicao - Posição a ser preenchida. As posições 1 a 6 correspondem às quantidas de uns até seis, ou seja, as laterais do placar. As outas posições são: 7 - full hand; 8 - sequencia; 9 - quadra; e 10 - quina
-	 * @param dados - um array de inteiros, de tamanho 5. Cada posição corresponde a um valor de um dado. Supões-se que cada dado pode ter valor entre 1 e 6.
-	 * @throws IllegalArgumentException - Se a posição estiver ocupada ou se for passado um valor de posição inválido, essa exceção é lançada. Não é feita nenhuma verificação quanto ao tamanho do array nem quanto ao seu conteúdo.
+	 * Adiciona uma sequencia de dados em uma determinada posicao do placar.
+	 * Apos a chamada, aquela posicao torna-se ocupada e nao pode ser usada uma segunda vez.
+	 * @param posicao - Posicao a ser preenchida. As posicoes 1 a 6 correspondem as quantidas de uns ate seis, ou seja, as laterais do placar. As outas posicoes sao: 7 - full hand; 8 - sequencia; 9 - quadra; e 10 - quina
+	 * @param dados - um array de inteiros, de tamanho 5. Cada posicao corresponde a um valor de um dado. Supoes-se que cada dado pode ter valor entre 1 e 6.
+	 * @throws IllegalArgumentException - Se a posicao estiver ocupada ou se for passado um valor de posicao invalido, essa excecao e lancada. Nao e feita nenhuma verificacao quanto ao tamanho do array nem quanto ao seu conteudo.
 	 */
 	public void add(int posicao, int[] dados) {
 		if(placar[posicao-1] != -1 || posicao < 1 || posicao > 10) {
@@ -83,7 +82,7 @@ public class Placar {
 	}
 
 	/**
-	 * Computa a soma dos valores obtidos, considerando apenas as posições que já estão ocupadas.
+	 * Computa a soma dos valores obtidos, considerando apenas as posicoes que ja estao ocupadas.
 	 * @return O valor da soma.
 	 */
 	public int getScore(){
@@ -95,7 +94,7 @@ public class Placar {
 	}
 
 	/**
-	 * A representação na forma de string, mostra o placar completo, indicando quais são as posições livres (com seus respectivos números) e o valor obtido nas posições já ocupadas.
+	 * A representacao na forma de string, mostra o placar completo, indicando quais sao as posicoes livres (com seus respectivos numeros) e o valor obtido nas posicoes ja ocupadas.
 	 */
 	@Override
 		public String toString(){
