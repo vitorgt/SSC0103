@@ -26,9 +26,12 @@ public class ContaBancaria {
 			this.saldo += deposito;
 		}
 	}
-	public void saca(double saque){
+	protected void saca(double saque){
 		if(saldo > saque){
 			this.saldo -= saque;
+		}
+		else{
+			System.out.println("Limite excedido");
 		}
 	}
 }
