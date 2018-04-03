@@ -13,9 +13,13 @@ public class ContaEspecial extends ContaBancaria{
 	public void setLimite(double limite) {
 		this.limite = limite;
 	}
+	@Override
 	public void saca(double saque){
 		if((getSaldo()+limite) > saque){
 			setSaldo(getSaldo()-saque);
+		}
+		else{
+			System.out.println("Limite excedido");
 		}
 	}
 
