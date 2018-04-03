@@ -14,7 +14,7 @@ public class ContaPoupanca extends ContaBancaria{
 		this.vencimento = vencimento;
 	}
 	public void atualiza(double tx) {
-		setSaldo(getSaldo()*(1+(tx/100)));
+		setSaldo(getSaldo()*(1+tx));
 	}
 
 }
