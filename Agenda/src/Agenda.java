@@ -10,47 +10,37 @@ public class Agenda{
 	public static void main(String[] args){
 		int op = 0;
 		Agenda a = new Agenda();
-		while(1){
+		while(true){
 			op = a.readOption();
 			switch(op){
 				case 1:
-					System.out.println("Name: ");
-					String a1 = EntradaTeclado.leString();
-					System.out.println("Address: ");
-					String a2 = EntradaTeclado.leString();
-					System.out.println("Email: ");
-					String a3 = EntradaTeclado.leString();
-					System.out.println("CPF: ");
-					String a4 = EntradaTeclado.leString();
-					System.out.println("Matrial Status: ");
-					String a5 = EntradaTeclado.leString();
-					System.out.println("Date of Birth: ");
-					String a6 = EntradaTeclado.leString();
+					String a1 = a.type("Name: ");
+					String a2 = a.type("Address: ");
+					String a3 = a.type("Email: ");
+					String a4 = a.type("CPF: ");
+					String a5 = a.type("Matrial Status: ");
+					String a6 = a.type("Date of Birth: ");
 					CPF cp = new CPF(a1, a2, a3, a4, a5, a6);
-					c.add(cp);
+					a.add(cp);
 					System.out.println("************** Contact added **************");
 					break;
 				case 2:
-					System.out.println("Name: ");
-					String a1 = EntradaTeclado.leString();
-					System.out.println("Address: ");
-					String a2 = EntradaTeclado.leString();
-					System.out.println("Email: ");
-					String a3 = EntradaTeclado.leString();
-					System.out.println("CNPJ: ");
-					String a4 = EntradaTeclado.leString();
-					System.out.println("State Registration: ");
-					String a5 = EntradaTeclado.leString();
-					System.out.println("Official Company Name: ");
-					String a6 = EntradaTeclado.leString();
+					a1 = a.type("Name: ");
+					a2 = a.type("Address: ");
+					a3 = a.type("Email: ");
+					a4 = a.type("CNPJ: ");
+					a5 = a.type("State Registration: ");
+					a6 = a.type("Official Company Name: ");
 					CNPJ cn = new CNPJ(a1, a2, a3, a4, a5, a6);
-					c.add(cn);
+					a.add(cn);
 					System.out.println("************** Contact added **************");
 					break;
 				case 3:
-					System.out.println("Name: ");
-					String remove = EntradaTeclado.leString();
+					String remove = a.type("Name: ");
+					System.out.println("remove "+remove+"?");
 					Contacts search = a.search(remove);
+					System.out.println("remove");
+					a.printContact(search);
 					if(search != null){
 						search.setActive(false);
 						System.out.println("************** Contact removed **************");
@@ -62,8 +52,7 @@ public class Agenda{
 				case 4:
 				case 5:
 				case 6:
-					System.out.println((op == 4 ? "Name: ":)+(op == 5 ? "CPF: ":)+(op == 6 ? "CNPJ: ":));
-					lookfor = EntradaTeclado.leString();
+					String lookfor = a.type(((op == 4) ? "Name: " : "")+((op == 5) ? "CPF: " : "")+((op == 6) ? "CNPJ: " : ""));
 					search = a.search(lookfor);
 					if(search != null){
 						a.printContact(search);
@@ -76,6 +65,22 @@ public class Agenda{
 					a.printContacts();
 					break;
 			}
+			System.out.println("Type ENTER to continue");
+			a.type("");
+		}
+	}
+
+	private String type(String out){
+		String typing;
+		while(true){
+			try{
+				System.out.println(out);
+				typing = EntradaTeclado.leString();
+				return typing;
+			}
+			catch(Exception e){
+				System.out.println("Retry typing please");
+			}
 		}
 	}
 
@@ -86,52 +91,54 @@ public class Agenda{
 			System.out.println("Type an option: ");
 			try{
 				k = EntradaTeclado.leInt();
-				if(k > 0 && k < 7)
+				if(k > 0 && k < 8)
 					return k;
 			}
-			catch(Exceprion e){
+			catch(Exception e){
 				;
 			}
 		}
 	}
 
-	private void add(Contact c){
+	private void add(Contacts c){
 		contacts[nContacts++] = c;
 	}
 
 	private void printContacts(){
 		for(Contacts ctc : contacts){
+			if(ctc == null) break;
 			printContact(ctc);
 		}
 	}
 
 	private void printContact(Contacts ctc){
-		if(!ctc) break;
-		if(ctc.isActive()){
+		if(ctc != null && ctc.isActive()){
 			System.out.println("Name: "+ctc.getName());
-			System.out.println("Address: "+ctc.getAddress());
-			System.out.println("Email: "+ctc.getEmail());
+			System.out.println("\tAddress: "+ctc.getAddress());
+			System.out.println("\tEmail: "+ctc.getEmail());
 			if(ctc instanceof CPF){
-				System.out.println("CPF: "+ctc.getCPF());
-				System.out.println("Matrial Status: "+ctc.getMatrial());
-				System.out.println("Date of Birth: "+ctc.getBirth());
+				System.out.println("\tCPF: "+((CPF)ctc).getCPF());
+				System.out.println("\tMatrial Status: "+((CPF)ctc).getMatrial());
+				System.out.println("\tDate of Birth: "+((CPF)ctc).getBirth());
 			}
 			else if(ctc instanceof CNPJ){
-				System.out.println("CNPJ: "+ctc.getCNPJ());
-				System.out.println("State Registration: "+ctc.getEntry());
-				System.out.println("Official Company Name: "+ctc.getReason());
+				System.out.println("\tCNPJ: "+((CNPJ)ctc).getCNPJ());
+				System.out.println("\tState Registration: "+((CNPJ)ctc).getEntry());
+				System.out.println("\tOfficial Company Name: "+((CNPJ)ctc).getReason());
 			}
+			System.out.println();
 		}
 	}
 
-	private Contacs search(String lookingfor){
+	private Contacts search(String lookingfor){
 		for(Contacts ctc : contacts){
 			if(ctc == null) break;
+			printContact(ctc);
 			if(ctc.getName() == lookingfor) return ctc;
 			if(ctc instanceof CPF)
-				if(ctc.getCPF() == lookingfor) return ctc;
+				if(((CPF)ctc).getCPF() == lookingfor) return ctc;
 			if(ctc instanceof CNPJ)
-				if(ctc.getCNPJ() == lookingfor) return ctc;
+				if(((CNPJ)ctc).getCNPJ() == lookingfor) return ctc;
 		}
 		return null;
 	}
