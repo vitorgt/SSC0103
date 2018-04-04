@@ -37,10 +37,7 @@ public class Agenda{
 					break;
 				case 3:
 					String remove = a.type("Name: ");
-					System.out.println("remove "+remove+"?");
 					Contacts search = a.search(remove);
-					System.out.println("remove");
-					a.printContact(search);
 					if(search != null){
 						search.setActive(false);
 						System.out.println("************** Contact removed **************");
@@ -114,17 +111,17 @@ public class Agenda{
 	private void printContact(Contacts ctc){
 		if(ctc != null && ctc.isActive()){
 			System.out.println("Name: "+ctc.getName());
-			System.out.println("\tAddress: "+ctc.getAddress());
-			System.out.println("\tEmail: "+ctc.getEmail());
+			System.out.println("Address: "+ctc.getAddress());
+			System.out.println("Email: "+ctc.getEmail());
 			if(ctc instanceof CPF){
-				System.out.println("\tCPF: "+((CPF)ctc).getCPF());
-				System.out.println("\tMatrial Status: "+((CPF)ctc).getMatrial());
-				System.out.println("\tDate of Birth: "+((CPF)ctc).getBirth());
+				System.out.println("CPF: "+((CPF)ctc).getCPF());
+				System.out.println("Matrial Status: "+((CPF)ctc).getMatrial());
+				System.out.println("Date of Birth: "+((CPF)ctc).getBirth());
 			}
 			else if(ctc instanceof CNPJ){
-				System.out.println("\tCNPJ: "+((CNPJ)ctc).getCNPJ());
-				System.out.println("\tState Registration: "+((CNPJ)ctc).getEntry());
-				System.out.println("\tOfficial Company Name: "+((CNPJ)ctc).getReason());
+				System.out.println("CNPJ: "+((CNPJ)ctc).getCNPJ());
+				System.out.println("State Registration: "+((CNPJ)ctc).getEntry());
+				System.out.println("Official Company Name: "+((CNPJ)ctc).getReason());
 			}
 			System.out.println();
 		}
@@ -133,7 +130,6 @@ public class Agenda{
 	private Contacts search(String lookingfor){
 		for(Contacts ctc : contacts){
 			if(ctc == null) break;
-			printContact(ctc);
 			if(ctc.getName().equals(lookingfor)) return ctc;
 			if(ctc instanceof CPF)
 				if(((CPF)ctc).getCPF().equals(lookingfor)) return ctc;
