@@ -3,6 +3,7 @@ public class Agenda{
 
 	private Contacts contacts[] = new Contacts[100];
 	private int nContacts = 0;
+	private int nCPF = 0;
 
 	public Agenda(){
 	}
@@ -67,6 +68,38 @@ public class Agenda{
 		}
 	}
 
+	private void swap(int a, int b){
+		Contacts temp;
+		temp = contacts[b];
+		contacts[b] = contacts[a];
+		contacts[a] = temp;
+	}
+
+	private void sort(){
+		int i = 0, j = 0, k = 0;
+		for(i = 0; i < nContacts; i++){
+			for(j = 0; j < (nContacts - i - 1); j++){
+				if(contacts[j+1] instanceof CPF){
+					swap(j, j+1);
+				}
+			}
+		}
+		for(i = 0; i < nCPF; i++){
+			for(j = 0; j < (nCPF - i - 1); j++){
+				if(((CPF)contacts[j+1]).getCPF().compareTo(((CPF)contacts[j]).getCPF()) < 0){
+					swap(j+1, j);
+				}
+			}
+		}
+		for(i = nCPF, k = 0; i < nContacts; i++, k++){
+			for(j = nCPF; j < (nContacts - k - 1); j++){
+				if(((CNPJ)contacts[j+1]).getCNPJ().compareTo(((CNPJ)contacts[j]).getCNPJ()) < 0){
+					swap(j+1, j);
+				}
+			}
+		}
+	}
+
 	private String type(String out){
 		String typing;
 		while(true){
@@ -99,6 +132,8 @@ public class Agenda{
 
 	private void add(Contacts c){
 		contacts[nContacts++] = c;
+		if(c instanceof CPF) ++nCPF;
+		sort();
 	}
 
 	private void printContacts(){
@@ -110,7 +145,6 @@ public class Agenda{
 
 	private void printContact(Contacts ctc){
 		if(ctc != null && ctc.isActive()){
-			System.out.println();
 			System.out.println("Name: "+ctc.getName());
 			System.out.println("Address: "+ctc.getAddress());
 			System.out.println("Email: "+ctc.getEmail());
@@ -131,11 +165,13 @@ public class Agenda{
 	private Contacts search(String lookingfor){
 		for(Contacts ctc : contacts){
 			if(ctc == null) break;
-			if(ctc.getName().equals(lookingfor)) return ctc;
-			if(ctc instanceof CPF)
-				if(((CPF)ctc).getCPF().equals(lookingfor)) return ctc;
-			if(ctc instanceof CNPJ)
-				if(((CNPJ)ctc).getCNPJ().equals(lookingfor)) return ctc;
+			if(ctc.isActive()){
+				if(ctc.getName().equals(lookingfor)) return ctc;
+				if(ctc instanceof CPF)
+					if(((CPF)ctc).getCPF().equals(lookingfor)) return ctc;
+				if(ctc instanceof CNPJ)
+					if(((CNPJ)ctc).getCNPJ().equals(lookingfor)) return ctc;
+			}
 		}
 		return null;
 	}
