@@ -43,10 +43,11 @@ public class Contas {
 					conta = EntradaTeclado.leInt();
 					System.out.println("Valor a sacar: ");
 					double valor = EntradaTeclado.leDouble();
-					cp = ct.procura(conta);
-					if ( cp != null ) {
+					ContaBancaria search;
+					search = ct.procura(conta);
+					if ( search != null ) {
 						try {
-							cp.saca(valor);
+							search.saca(valor);
 							System.out.println("****************** Saque realizado ***********");
 						} catch (Exception e) {
 							System.out.println("****************** Saque não realizado ***********");
@@ -64,9 +65,9 @@ public class Contas {
 					conta = EntradaTeclado.leInt();
 					System.out.println("Valor a depositar: ");
 					valor = EntradaTeclado.leDouble();
-					cp = ct.procura(conta);
-					if ( cp != null ) {
-						cp.deposita(valor);
+					search = ct.procura(conta);
+					if ( search != null ) {
+						search.deposita(valor);
 						System.out.println("****************** Depósito realizado ***********");
 					}
 					else {
@@ -120,7 +121,7 @@ public class Contas {
 		for (ContaBancaria ctb : contas)
 		{
 			if ( ctb == null ) break;
-			System.out.println("Numero da conta poupança:" + ctb.getNumConta());
+			System.out.println("Numero da conta "+((ctb instanceof ContaPoupanca) ? "poupança" : "especial")+": "+ ctb.getNumConta());
 			System.out.println("Titular: " + ctb.getNomeCliente());
 			System.out.println("Saldo: " + ctb.getSaldo());
 			System.out.println();
