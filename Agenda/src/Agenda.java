@@ -110,6 +110,7 @@ public class Agenda{
 
 	private void printContact(Contacts ctc){
 		if(ctc != null && ctc.isActive()){
+			System.out.println();
 			System.out.println("Name: "+ctc.getName());
 			System.out.println("Address: "+ctc.getAddress());
 			System.out.println("Email: "+ctc.getEmail());
