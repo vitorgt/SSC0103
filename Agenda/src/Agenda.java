@@ -134,11 +134,11 @@ public class Agenda{
 		for(Contacts ctc : contacts){
 			if(ctc == null) break;
 			printContact(ctc);
-			if(ctc.getName() == lookingfor) return ctc;
+			if(ctc.getName().equals(lookingfor)) return ctc;
 			if(ctc instanceof CPF)
-				if(((CPF)ctc).getCPF() == lookingfor) return ctc;
+				if(((CPF)ctc).getCPF().equals(lookingfor)) return ctc;
 			if(ctc instanceof CNPJ)
-				if(((CNPJ)ctc).getCNPJ() == lookingfor) return ctc;
+				if(((CNPJ)ctc).getCNPJ().equals(lookingfor)) return ctc;
 		}
 		return null;
 	}
