@@ -3,8 +3,8 @@ public class ContaEspecial extends ContaBancaria{
 
 	private double limite;
 
-	public ContaEspecial(String s, int conta, double limite) {
-		super(s, conta);
+	public ContaEspecial(String s, double limite) {
+		super(s);
 		this.limite = limite;
 	}
 	public double getLimite() {
@@ -21,6 +21,9 @@ public class ContaEspecial extends ContaBancaria{
 		else{
 			throw new IllegalArgumentException("Limit exceeded");
 		}
+	}
+	@Override
+	public void atualiza(double tx){
 	}
 
 }

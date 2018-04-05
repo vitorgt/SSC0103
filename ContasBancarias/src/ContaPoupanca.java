@@ -1,10 +1,10 @@
 
-public class ContaPoupanca extends ContaBancaria{
+public abstract class ContaPoupanca extends ContaBancaria{
 
 	private int vencimento;
 
-	public ContaPoupanca(String s, int conta, int dia) {
-		super(s, conta);
+	public ContaPoupanca(String s, int dia) {
+		super(s);
 		this.vencimento = dia;
 	}
 	public int getVencimento() {
@@ -12,9 +12,6 @@ public class ContaPoupanca extends ContaBancaria{
 	}
 	public void setVencimento(int vencimento) {
 		this.vencimento = vencimento;
-	}
-	public void atualiza(double tx) {
-		setSaldo(getSaldo()*(1+tx));
 	}
 
 }

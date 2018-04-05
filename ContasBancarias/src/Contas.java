@@ -2,7 +2,6 @@
 public class Contas {
 
 	private ContaBancaria contas[] = new ContaBancaria[100];
-	private int nContas = 0;
 
 	public Contas() {
 	}
@@ -16,31 +15,37 @@ public class Contas {
 			switch (op)
 			{
 				case 1: 
-					System.out.println("Numero da conta: ");
-					int conta = EntradaTeclado.leInt();
 					System.out.println("Nome do correntista: ");
 					String s = EntradaTeclado.leString();
 					System.out.println("Dia de vencimento: ");
 					int dia = EntradaTeclado.leInt();
-					ContaPoupanca cp = new ContaPoupanca(s, conta, dia);
-					ct.add(cp);
+					ContaPoupancaSimples cps = new ContaPoupancaSimples(s, dia);
+					ct.add(cps);
 					System.out.println("************ Conta criada.**************");
 					break;
 
 				case 2: 
-					System.out.println("Numero da conta: ");
-					conta = EntradaTeclado.leInt();
+					System.out.println("Nome do correntista: ");
+					s = EntradaTeclado.leString();
+					System.out.println("Dia de vencimento: ");
+					dia = EntradaTeclado.leInt();
+					ContaPoupancaOuro cpo = new ContaPoupancaOuro(s, dia);
+					ct.add(cpo);
+					System.out.println("************ Conta criada.**************");
+					break;
+
+				case 3: 
 					System.out.println("Nome do correntista: ");
 					s = EntradaTeclado.leString();
 					System.out.println("Limite de saque: ");
 					double limite = EntradaTeclado.leDouble();
-					ContaEspecial ce = new ContaEspecial(s, conta, limite);
+					ContaEspecial ce = new ContaEspecial(s, limite);
 					ct.add(ce);
 					System.out.println("************ Conta criada.**************");
 					break;
-				case 3:
+				case 4:
 					System.out.println("Numero da conta: ");
-					conta = EntradaTeclado.leInt();
+					int conta = EntradaTeclado.leInt();
 					System.out.println("Valor a sacar: ");
 					double valor = EntradaTeclado.leDouble();
 					ContaBancaria search;
@@ -60,7 +65,7 @@ public class Contas {
 					}
 
 					break;
-				case 4:
+				case 5:
 					System.out.println("Numero da conta: ");
 					conta = EntradaTeclado.leInt();
 					System.out.println("Valor a depositar: ");
@@ -75,16 +80,16 @@ public class Contas {
 						break;
 					}
 					break;
-				case 6: 
+				case 7: 
 					ct.printSaldos();
 					break;
-				case 5:
+				case 6:
 					System.out.println("Qual o valor da taxa? ");
 					double tx = EntradaTeclado.leDouble();
 					ct.atualizaPoupança(tx);
 					System.out.println("Saldos atualizados");
 					break;
-				case 7:
+				case 8:
 					System.out.println("Terminando o programa....");
 					return;
 			}
@@ -96,15 +101,16 @@ public class Contas {
 	}
 
 	private int leOpcao() {
-		System.out.println("1) Criar poupança\n2) Criar conta especial\n3) Realizar saque\n4) Realizar deposito\n"
-				+ "5) Atualizar poupanças\n6) Mostrar saldos\n7) Sair");
+		System.out.println("1) Criar poupança simples\n2) Criar poupança ouro\n3) Criar conta especial\n"
+				+"4) Realizar saque\n5) Realizar deposito\n6) Atualizar poupanças\n"
+				+"7) Mostrar saldos\n8) Sair");
 		int k = -1;
 		while (true)
 		{
 			System.out.println("Digite a opção desejada ===> ");
 			try {
 				k = EntradaTeclado.leInt();
-				if ( k > 0 && k < 8 )
+				if ( k > 0 && k < 9 )
 					return k;
 			}
 			catch (Exception e) {
@@ -114,14 +120,14 @@ public class Contas {
 	}
 
 	private void add(ContaBancaria cb) {
-		contas[nContas++] = cb;		
+		contas[ContaBancaria.getQuantidadeContas()-1] = cb;		
 	}
 
 	private void printSaldos() {
 		for (ContaBancaria ctb : contas)
 		{
 			if ( ctb == null ) break;
-			System.out.println("Numero da conta "+((ctb instanceof ContaPoupanca) ? "poupança" : "especial")+": "+ ctb.getNumConta());
+			System.out.println("Numero da conta "+((ctb instanceof ContaPoupanca) ? "poupança "+((ctb instanceof ContaPoupancaSimples) ? "simples" : "ouro") : "especial")+": "+ ctb.getNumConta());
 			System.out.println("Titular: " + ctb.getNomeCliente());
 			System.out.println("Saldo: " + ctb.getSaldo());
 			System.out.println();
@@ -132,9 +138,7 @@ public class Contas {
 		for (ContaBancaria ctb : contas)
 		{
 			if ( ctb == null ) break;
-
-			if ( ctb instanceof ContaPoupanca )
-				((ContaPoupanca)ctb).atualiza(tx);
+			ctb.atualiza(tx);
 		}
 	}
 
