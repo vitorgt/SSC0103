@@ -1,3 +1,5 @@
+import BozoException.BozoException;
+
 /**
  * Esta classe representa o placar de um jogo de Bozo.
  * Permite que combinacoes de dados sejam alocadas as posicoes e mantem o escore de um jogador.
@@ -15,9 +17,9 @@ public class Placar {
 	 * @param dados - um array de inteiros, de tamanho 5. Cada posicao corresponde a um valor de um dado. Supoes-se que cada dado pode ter valor entre 1 e 6.
 	 * @throws IllegalArgumentException - Se a posicao estiver ocupada ou se for passado um valor de posicao invalido, essa excecao e lancada. Nao e feita nenhuma verificacao quanto ao tamanho do array nem quanto ao seu conteudo.
 	 */
-	public void add(int posicao, int[] dados) {
-		if(placar[posicao-1] != -1 || posicao < 1 || posicao > 10) {
-			throw new IllegalArgumentException("Parametros invalidos"); 
+	public void add(int posicao, int[] dados) throws BozoException{
+		if(posicao < 1 || posicao > 10 || placar[posicao-1] != -1) {
+			throw new BozoException("Parametros invalidos"); 
 		}
 
 		int[] qtd = {0,0,0,0,0,0}; // quantidade de vezes temos um dado com tal valor
@@ -71,7 +73,7 @@ public class Placar {
 			}else{
 				placar[posicao-1] = 0;
 			}
-		}else if(posicao == 10){
+		}else{
 			if(quina >=1){
 				placar[posicao-1] = 40;
 			}else{

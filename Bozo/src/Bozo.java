@@ -1,4 +1,5 @@
 import java.io.IOException;
+import BozoException.BozoException;
 
 /**
  * Essa e a classe inicial do programa Bozo. Possui apenas o metodo main, que cuida da execucao do jogo.
@@ -23,7 +24,7 @@ public class Bozo {
 
 		for(int i=1;i<=10;i++){ // 10 rodadas
 			System.out.printf("****** Rodada %d\nPressione ENTER para lancar os dados\n",i);
-			String aux = EntradaTeclado.leString(); // serve para ler o enter do usuario
+			EntradaTeclado.leString(); // serve para ler o enter do usuario
 			
 			for(int t = 0;t<2;t++){ // duas vezes para mudar os dados
 				if(t == 0) rola.Rolar();
@@ -55,14 +56,15 @@ public class Bozo {
 			System.out.println(placar);
 
 			while(true){ // enquanto a posição digitada não for valida
-				System.out.print("Escolha a posicao que quer ocupar com essa jogada ===> ");
-				int pos = EntradaTeclado.leInt();
-
 				try{
+					System.out.print("Escolha a posicao que quer ocupar com essa jogada ===> ");
+					int pos = EntradaTeclado.leInt();
 					placar.add(pos, rola.getResultadosDados());
 					break; // a posição digitada é valida, sai do Loop
-				}catch(Exception e){
+				}catch(BozoException e){
 					System.out.printf("Valor inválido. Posição ocupada ou inexistente.\n");
+				}catch(Exception e){
+					System.out.printf("Valor digitado nao eh um numero.\n");
 				}
 			}
 			System.out.println(placar);

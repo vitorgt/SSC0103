@@ -18,14 +18,6 @@ public class Dado {
 	private String d6 = "+-----+\n|*   *|\n|*   *|\n|*   *|\n+-----+";
 
 	/**
-	 * Nao tem funcao real dentro da classe.
-	 * Foi usada apenas para testar os metodos implementados
-	 * @param args - sem uso
-	 */
-	public static void main(String[] args) {
-	}
-
-	/**
 	 * Recupera o ultimo numero selecionado.
 	 * @return o numero do ultimo lado selecionado.
 	 */
@@ -71,7 +63,7 @@ public class Dado {
 				else if(ultimoGerado == 3) return d3;
 				else if(ultimoGerado == 4) return d4;
 				else if(ultimoGerado == 5) return d5;
-				else if(ultimoGerado == 6) return d6;
+				else return d6;
 			}
 			return (Integer.toString(ultimoGerado));
 		}

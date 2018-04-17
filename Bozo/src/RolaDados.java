@@ -121,13 +121,4 @@ public class RolaDados {
 			return S;
 		}
 
-	/**
-	 * Nao tem funcao real dentro da classe.
-	 * Foi usada apenas para testar os metodos implementados
-	 * @param args - sem uso
-	 */
-	public static void main(String[] args){
-
-	}
-
 }
