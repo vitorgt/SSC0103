@@ -1,5 +1,5 @@
-# SSC0103
-Object-Oriented Programming
+# Object-Oriented Programming
+SSC0103
 
 Institute of Mathematical and Computer Sciences
 
