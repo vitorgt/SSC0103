@@ -19,7 +19,7 @@ public class Dictionary<K,V>{
 
 	public void add(K newk, V newv){
 		if(n == v.length)
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("Array full");
 		k[n] = newk;
 		v[n] = newv;
 		n++;
