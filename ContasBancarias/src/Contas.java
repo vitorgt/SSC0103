@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Contas {
 
@@ -120,7 +121,8 @@ public class Contas {
 	}
 
 	private void add(ContaBancaria cb) {
-		contas[ContaBancaria.getQuantidadeContas()-1] = cb;		
+		contas[ContaBancaria.getQuantidadeContas()-1] = cb;
+		Arrays.sort(contas, 0, ContaBancaria.getQuantidadeContas()-1);
 	}
 
 	private void printSaldos() {
