@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Vector;
@@ -21,7 +22,7 @@ public class GUIBozo {
 		
 		
 		b = new Vector<JButton>();
-		Vector<SelectListener> lis = new Vector<SelectListener>();
+		Vector<BozoListener> lis = new Vector<BozoListener>();
 
 		b.add(new JButton("Ás"));
 		b.add(new JButton("Duque"));
@@ -37,7 +38,7 @@ public class GUIBozo {
 		b.add(new JButton("Bozo Game :)"));
 		
 		for(int i = 0; i < 12; i++) {
-			lis.add(new SelectListener());
+			lis.add(new BozoListener());
 			b.elementAt(i).addActionListener(lis.elementAt(i));
 			b.elementAt(i).setBackground(new Color(216,235,255));
 			b.elementAt(i).setForeground(Color.black);
