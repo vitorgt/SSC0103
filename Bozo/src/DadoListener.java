@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
+ */
 public class DadoListener implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
