@@ -6,6 +6,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
+ */
 public class GUIDados {
 	
 	public static Vector<JButton> d = null;
