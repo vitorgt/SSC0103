@@ -3,8 +3,8 @@ import BozoException.BozoException;
 /**
  * Esta classe representa o placar de um jogo de Bozo.
  * Permite que combinacoes de dados sejam alocadas as posicoes e mantem o escore de um jogador.
- * @author Fabio e Vitor
- *
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
  */
 public class Placar {
 
@@ -81,6 +81,10 @@ public class Placar {
 			}
 		}
 
+	}
+
+	public int[] getPlacar() {
+		return placar;
 	}
 
 	/**
