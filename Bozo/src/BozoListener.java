@@ -1,13 +1,19 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
 import BozoException.BozoException;
 
+/**
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
+ */
 public class BozoListener implements ActionListener{
 	
-	private enum Pos {Ás,Duque,Terno,Quadra,Quina,Sena,Full,Seguida,Quadrada,General,Rolar};
+	private enum Pos {Uns,Dois,Tres,Quatros,Cincos,Seis,Full,Sequencia,Quadra,Quina,Rolar};
 	
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
@@ -15,7 +21,6 @@ public class BozoListener implements ActionListener{
 		try {
 			Integer.parseInt(e.getActionCommand());
 			JOptionPane.showMessageDialog(null, "Posição já ocupada");
-			GUIMain.i = 0;
 		}
 		catch (Exception ee) {
 			if(e.getActionCommand().equals("Rolar")) {
@@ -51,6 +56,8 @@ public class BozoListener implements ActionListener{
 				if(GUIMain.rodada == 10){
 					JOptionPane.showMessageDialog(null, "Placar final: " + GUIMain.placar.getScore());
 				}
+			}else {
+				JOptionPane.showMessageDialog(null, "FEITO POR\nFabio Fogarin Destro 10284667\nVitor Gratiere Torres 10284952");
 			}
 		}
 	}
