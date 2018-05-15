@@ -2,6 +2,10 @@ import java.awt.Color;
 
 import javax.swing.JOptionPane;
 
+/**
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
+ */
 public class GUIMain {
 	
 	private static GUIBozo bozo = null;
