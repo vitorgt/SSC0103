@@ -6,6 +6,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * @author Fabio Fogarin Destro 10284667
+ * @author Vitor Gratiere Torres 10284952
+ */
 public class GUIBozo {
 	
 	public static Vector<JButton> b = null;
@@ -24,16 +28,16 @@ public class GUIBozo {
 		b = new Vector<JButton>();
 		Vector<BozoListener> lis = new Vector<BozoListener>();
 
-		b.add(new JButton("Ás"));
-		b.add(new JButton("Duque"));
-		b.add(new JButton("Terno"));
+		b.add(new JButton("Uns"));
+		b.add(new JButton("Dois"));
+		b.add(new JButton("Tres"));
+		b.add(new JButton("Quatros"));
+		b.add(new JButton("Cincos"));
+		b.add(new JButton("Seis"));
+		b.add(new JButton("Full"));
+		b.add(new JButton("Sequencia"));
 		b.add(new JButton("Quadra"));
 		b.add(new JButton("Quina"));
-		b.add(new JButton("Sena"));
-		b.add(new JButton("Full"));
-		b.add(new JButton("Seguida"));
-		b.add(new JButton("Quadrada"));
-		b.add(new JButton("General"));
 		b.add(new JButton("Rolar"));
 		b.add(new JButton("Bozo Game :)"));
 		
