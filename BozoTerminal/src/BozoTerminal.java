@@ -25,12 +25,13 @@ public class BozoTerminal {
 		for(int i = 0; i < 10; i++){
 			System.out.println("Round #"+(i+1)+"\nPress ENTER to roll the dice\n");
 			KeyboardInput.readString();
+			dice.roll();
+			System.out.println(dice);
 			for(int j = 0; j < 2; j++){
-				if(j == 0) dice.roll();
-				System.out.println(dice);
 				System.out.println("Type the number of the dice you want to change (separated by spaces).");
 				String change = KeyboardInput.readString().trim();
 				dice.roll(change);
+				System.out.println(dice);
 			}
 			System.out.println(score);
 			while(true){
