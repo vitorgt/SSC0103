@@ -19,7 +19,7 @@ public class Client {
 	private static PrintStream out;
 	private static String name = "";
 	private static boolean change[] = new boolean[5];
-	private static int i = 0, round = 1, score = 0;
+	private static int i, round, score;
 
 	/**
 	 * Opens up connection with server,
@@ -35,6 +35,9 @@ public class Client {
 		out = new PrintStream(socket.getOutputStream());
 		new ScoreWindow();
 		new DiceWindow();
+		i = 0;
+		round = 1;
+		score = 0;
 		clearChange();
 		JOptionPane.showMessageDialog(null, "Click on the dice you want to change\n"+
 				"Then click on 'Roll' to roll them\n"+
