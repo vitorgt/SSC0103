@@ -170,9 +170,7 @@ public class ServerThread extends Thread {
 	 */
 	private void readI() throws BozoException {
 		String read = in.nextLine().trim();
-		if(read.split(" ").length > 2)
-			throw new BozoException("'I' command received more than 2 arguments");
-		else if(read.split(" ")[0].equals("I")){
+		if(read.split(" ")[0].equals("I")){
 			this.name = toProper(read.substring(2, read.length()).trim().toLowerCase());
 			out.println("Welcome "+name);
 			System.out.println(name+" online");
