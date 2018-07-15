@@ -6,36 +6,42 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Calendar.Builder;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
-public class Yo {
+public class LastFM {
 
 	private enum mon {Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec};
 
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 
 		HashMap<String, Artist> lib = new HashMap<>();
+		HashMap<Integer, int[]> hours = new HashMap<Integer, int[]>();
+		HashMap<Integer, int[]> weekdays = new HashMap<Integer, int[]>();
+		HashMap<Integer, int[]> monthdays = new HashMap<Integer, int[]>();
+		HashMap<Integer, int[]> months = new HashMap<Integer, int[]>();
+		HashMap<Integer, HashMap<Integer, int[]>> detail = new HashMap<Integer, HashMap<Integer, int[]>>();
 		BufferedReader br = null;
+		hours.put(-1, new int[24]);
+		weekdays.put(-1, new int[7]);
+		monthdays.put(-1, new int[31]);
+		months.put(-1, new int[12]);
 
 		try {
-			br = new BufferedReader(new FileReader(new File("src/yo.tsv")));
+			br = new BufferedReader(new FileReader(new File("yo.tsv")));
 		} catch (Exception e) {}
 
 		String line;
 		try {
 			while ((line = br.readLine()) != null) {
 				String reg[] = line.split("\t");
-				//if(!reg[1].isEmpty() && !reg[2].isEmpty() && !reg[3].isEmpty() && !reg[4].isEmpty() && !reg[5].isEmpty() && !reg[6].isEmpty() && !reg[7].isEmpty() && !reg[8].isEmpty()) {
 				Builder time = new Calendar.Builder();
 				time.set(Calendar.YEAR, Integer.parseInt(reg[1]));
 				time.set(Calendar.MONTH, Integer.parseInt(reg[2])-1);
 				time.set(Calendar.DAY_OF_MONTH, Integer.parseInt(reg[3]));
 				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(reg[4]));
 				time.set(Calendar.MINUTE, Integer.parseInt(reg[5]));
-				//System.out.println(time.build().getTime());
+				Calendar cal = time.build();
 				if(!lib.containsKey(reg[6])) {
 					lib.put(reg[6], new Artist());
 				}
@@ -45,94 +51,60 @@ public class Yo {
 				if(!lib.get(reg[6]).getAlbuns().get(reg[7]).getSong().containsKey(reg[8])) {
 					lib.get(reg[6]).getAlbuns().get(reg[7]).getSong().put(reg[8], new Song());
 				}
-				lib.get(reg[6]).getAlbuns().get(reg[7]).getSong().get(reg[8]).getListened().add(time.build().getTime());
-				//}
-				/*
-				   Set<HashMap<String, HashMap<String, Vector<String>>>> artista = lib.keySet();
-				   if(!lib.keySet()) {
-				   HashMap<String, HashMap<String, Vector<String>>> artista = new HashMap<String, HashMap<String, Vector<String>>>();
-				   lib.put(artista, new Vector<Date>());
-				   }
-				   lib.putIfAbsent(
-				   new HashMap<String, HashMap<String, Vector<String>>>().putIfAbsent(
-				   reg[6],
-				   new HashMap<String, Vector<String>>().putIfAbsent(
-				   reg[7],
-				   new Vector<String>().add(
-				   reg[8]
-				   )
-				   )
-				   ),
-				   new Vector<Date>().add(
-				   time.build().getTime()
-				   )
-				   )
-				   ;
-				   */
+				lib.get(reg[6]).getAlbuns().get(reg[7]).getSong().get(reg[8]).getListened().add(cal);
+				if(!hours.containsKey(cal.get(Calendar.YEAR))) {
+					hours.put(cal.get(Calendar.YEAR), new int[24]);
+					weekdays.put(cal.get(Calendar.YEAR), new int[7]);
+					monthdays.put(cal.get(Calendar.YEAR), new int[31]);
+					months.put(cal.get(Calendar.YEAR), new int[12]);
+					detail.put(cal.get(Calendar.YEAR), new HashMap<Integer, int[]>());
+				}
+				if(!detail.get(cal.get(Calendar.YEAR)).containsKey(cal.get(Calendar.MONTH)))
+					detail.get(cal.get(Calendar.YEAR)).put(cal.get(Calendar.MONTH), new int[YearMonth.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1).lengthOfMonth()]);
+				hours.		get(cal.get(Calendar.YEAR))[cal.get(Calendar.HOUR_OF_DAY)]++;//0-24
+				weekdays.	get(cal.get(Calendar.YEAR))[time.build().get(Calendar.DAY_OF_WEEK)-1]++;//1-7
+				monthdays.	get(cal.get(Calendar.YEAR))[cal.get(Calendar.DAY_OF_MONTH)-1]++;//1-31
+				months.		get(cal.get(Calendar.YEAR))[cal.get(Calendar.MONTH)]++;//0-11
+				detail.		get(cal.get(Calendar.YEAR)).get(cal.get(Calendar.MONTH))[cal.get(Calendar.DAY_OF_MONTH)-1]++;
+				hours.		get(-1)[cal.get(Calendar.HOUR_OF_DAY)]++;
+				weekdays.	get(-1)[cal.get(Calendar.DAY_OF_WEEK)-1]++;
+				monthdays.	get(-1)[cal.get(Calendar.DAY_OF_MONTH)-1]++;
+				months.		get(-1)[cal.get(Calendar.MONTH)]++;
 			}
 		} catch (Exception e) {}
-		HashMap<Integer, int[]> hours = new HashMap<Integer, int[]>();
-		hours.put(0, new int[24]);
-		HashMap<Integer, int[]> monthdays = new HashMap<Integer, int[]>();
-		monthdays.put(0, new int[31]);
-		HashMap<Integer, int[]> months = new HashMap<Integer, int[]>();
-		months.put(0, new int[12]);
-		HashMap<Integer, HashMap<Integer, int[]>> detail = new HashMap<Integer, HashMap<Integer, int[]>>();
-		//int hours[][] = 	new int[7][24];
-		//int monthdays[][] = new int[7][31];
-		//int months[][] = 	new int[7][12];
-		//int detail[][][] = 	new int[6][12][31];
-		for(String artist : lib.keySet()) {
-			//System.out.println(artist);
-			for(String album : lib.get(artist).getAlbuns().keySet()) {
-				//System.out.println("\t"+album);
-				for(String song : lib.get(artist).getAlbuns().get(album).getSong().keySet()) {
-					//System.out.println("\t\t("+lib.get(artist).getAlbuns().get(song).getSong().size()+") "+song);
-					//int dat = 0;
-					for(Date date : lib.get(artist).getAlbuns().get(album).getSong().get(song).getListened()) {
-						if(!hours.containsKey(date.getYear()+1900)) {
-							hours.put(date.getYear()+1900, new int[24]);
-							monthdays.put(date.getYear()+1900, new int[31]);
-							months.put(date.getYear()+1900, new int[12]);
-							detail.put(date.getYear()+1900, new HashMap<Integer, int[]>());
-						}
-						if(!detail.get(date.getYear()+1900).containsKey(date.getMonth()))
-							detail.get(date.getYear()+1900).put(date.getMonth(), new int[YearMonth.of(date.getYear()+1900, date.getMonth()+1).lengthOfMonth()]);
-						hours.get(date.getYear()+1900)[date.getHours()]++;
-						hours.get(0)[date.getHours()]++;
-						monthdays.get(date.getYear()+1900)[date.getDate()-1]++;
-						monthdays.get(0)[date.getDate()-1]++;
-						months.get(date.getYear()+1900)[date.getMonth()]++;
-						months.get(0)[date.getMonth()]++;
-						detail.get(date.getYear()+1900).get(date.getMonth())[date.getDate()-1]++;
-						//hours[6][date.getHours()]++;
-						//monthdays[date.getYear()-113][date.getDate()-1]++;
-						//monthdays[6][date.getDate()-1]++;
-						//months[date.getYear()-113][date.getMonth()]++;
-						//months[6][date.getMonth()]++;
-						//detail[date.getYear()-113][date.getMonth()][date.getDate()-1]++;
-					}
-					//System.out.println("\t\t("+dat+") "+song);
-				}
-			}
-		}
-		Vector<Integer> years = new Vector<>();
+		//		for(String artist : lib.keySet()) {
+		//			System.out.println(artist);
+		//			for(String album : lib.get(artist).getAlbuns().keySet()) {
+		//				System.out.println("\t"+album);
+		//				for(String song : lib.get(artist).getAlbuns().get(album).getSong().keySet()) {
+		//					System.out.println("\t\t("+lib.get(artist).getAlbuns().get(song).getSong().size()+") "+song);
+		//					int dat = 0;
+		//					for(Calendar cal : lib.get(artist).getAlbuns().get(album).getSong().get(song).getListened()) {
+		//					}
+		//					System.out.println("\t\t("+dat+") "+song);
+		//				}
+		//			}
+		//		}
+		Vector<Integer> years = new Vector<Integer>();
 		for(Integer year : hours.keySet())
-			years.add(year);
-		years.remove(0);
+			if(year != -1) years.add(year);
 		Collections.sort(years);
 		System.out.println("hours");
 		for(Integer year : years)
-			System.out.println(year+Arrays.toString(hours.get(year)));
-		System.out.println("TOTL"+Arrays.toString(hours.get(0)));
+			System.out.println(year+"\n"+Arrays.toString(hours.get(year)).replace("[", "").replace("]", ""));
+		System.out.println("TOTL\n"+Arrays.toString(hours.get(-1)).replace("[", "").replace("]", ""));
+		System.out.println("weekdays");
+		for(Integer year : years)
+			System.out.println(year+"\n"+Arrays.toString(weekdays.get(year)).replace("[", "").replace("]", ""));
+		System.out.println("TOTL\n"+Arrays.toString(weekdays.get(-1)).replace("[", "").replace("]", ""));
 		System.out.println("days of the month");
 		for(Integer year : years)
-			System.out.println(year+Arrays.toString(monthdays.get(year)));
-		System.out.println("TOTL"+Arrays.toString(monthdays.get(0)));
+			System.out.println(year+"\n"+Arrays.toString(monthdays.get(year)).replace("[", "").replace("]", ""));
+		System.out.println("TOTL\n"+Arrays.toString(monthdays.get(-1)).replace("[", "").replace("]", ""));
 		System.out.println("months");
 		for(Integer year : years)
-			System.out.println(year+Arrays.toString(months.get(year)));
-		System.out.println("TOTL"+Arrays.toString(months.get(0)));
+			System.out.println(year+"\n"+Arrays.toString(months.get(year)).replace("[", "").replace("]", ""));
+		System.out.println("TOTL\n"+Arrays.toString(months.get(-1)).replace("[", "").replace("]", ""));
 		int seqInt = 0;
 		String seqStr = "";
 		for(Integer year : years) {
@@ -173,65 +145,16 @@ public class Yo {
 				months1.add(month);
 			Collections.sort(months1);
 			for(Integer month : months1) {
-				System.out.println(month);
+				System.out.println(mon.values()[month]);
 				for(int k = 0; k < YearMonth.of(year, month+1).lengthOfMonth(); k++) {
 					System.out.printf("%d"+((k+1 == YearMonth.of(year, month+1).lengthOfMonth()) ? "" : ","), detail.get(year).get(month)[k]);
 				}
 				System.out.println();
 			}
 		}
-		//for(int i = 0; i < 6; i++)
-		//System.out.println((2013+i)+Arrays.toString(hours[i]));
-		//System.out.println("hours TOTAL\n"+Arrays.toString(hours[6]));
-		//		System.out.println("days of the month");
-		//		for(int i = 0; i < 6; i++)
-		//			System.out.println((2013+i)+Arrays.toString(monthdays[i]));
-		//		System.out.println("days of the month TOTAL\n"+Arrays.toString(monthdays[6]));
-		//		System.out.println("months");
-		//		for(int i = 0; i < 6; i++)
-		//			System.out.println((2013+i)+Arrays.toString(months[i]));
-		//		System.out.println("months TOTAL\n"+Arrays.toString(months[6]));
-		//		System.out.println("details");
-		//		int seq = 0;
-		//		String se = "";
-		//		for(int i = 0; i < 6; i++) {
-		//			System.out.println(2013+i);
-		//			for(int j = 0; j < 12; j++) {
-		//				System.out.println(" "+(j+1));
-		//				for(int k = 0; k < YearMonth.of(2013+i, j+1).lengthOfMonth(); k++) {
-		//					if(detail[i][j][k] == 0) {
-		//						if(seq != 0) {
-		//							se += seq+"|";
-		//							seq = 0;
-		//						}
-		//					}
-		//					else {
-		//						seq++;
-		//					}
-		//					System.out.printf("%3d, ",detail[i][j][k]);
-		//				}
-		//				System.out.println();
-		//				if(!se.isEmpty()) {
-		//					System.out.printf(se.trim());
-		//					se = "";
-		//				}
-		//				//System.out.println(Arrays.toString(detail[i][j]));
-		//			}
-		//		}
 	}
 
 }
-
-/*
-   class TypeVector<V>{
-   public String t;
-   public Vector<V> v;
-   public TypeVector(String t) {
-   this.t = t;
-   v = new Vector<V>();
-   }
-   }
-   */
 
 class Artist {
 	private HashMap<String, Album> albuns;
@@ -260,14 +183,14 @@ class Album {
 }
 
 class Song {
-	private Vector<Date> listened;
+	private Vector<Calendar> listened;
 	public Song() {
-		this.setListened(new Vector<Date>());
+		this.setListened(new Vector<Calendar>());
 	}
-	public Vector<Date> getListened() {
+	public Vector<Calendar> getListened() {
 		return listened;
 	}
-	public void setListened(Vector<Date> listened) {
-		this.listened = listened;
+	public void setListened(Vector<Calendar> vector) {
+		this.listened = vector;
 	}
 }
